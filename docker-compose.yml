@@ -1,0 +1,14 @@
+version: "3.0"
+services:
+  go-server:
+    build: "./app"
+    env_file:
+      - "app/.env"
+    ports:
+      - "9000:8888"
+    depends_on:
+      - "mongo-server"
+  mongo-server:
+    build: "./db"
+    ports:
+      - "27000:27017"
