@@ -9,6 +9,14 @@ services:
     depends_on:
       - "mongo-server"
   mongo-server:
-    build: "./db"
+    restart: always
+    image: mongo:4.2.0
     ports:
       - "27000:27017"
+    volumes:
+      - ./mongo/data:/data/db
+      - ./mongo/init:/docker-entrypoint-initdb.d
+    environment:
+      TZ: Asia/Tokyo
+    networks:
+      - default

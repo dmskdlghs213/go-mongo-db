@@ -1,10 +1,8 @@
 package main
 
 import (
-	"fmt"
-	"net/http"
-	"os"
-
+	"github.com/dmskdlghs213/go-mongoDB/app/model"
+	"github.com/dmskdlghs213/go-mongoDB/app/mongodb"
 	"github.com/labstack/echo"
 )
 
@@ -15,17 +13,20 @@ func main() {
 
 func Router() *echo.Echo {
 	e := echo.New()
-	e.POST("/insert", Insert)
+	di := Di()
+	e.POST("/users", di.Create)
+	e.POST("/user-groups", di.Creates)
+	e.GET("/users", di.Find)
+	e.GET("/user-groups", di.Finds)
+	e.PATCH("/users/:user_id", di.Update)
+	e.PATCH("/users", di.Updates)
+	e.DELETE("/users/:user_id", di.Delete)
 
 	return e
 }
 
-func Insert(c echo.Context) error {
-
-	dbName := os.Getenv("MONGO_DBNAME")
-	fmt.Println(dbName)
-
-	fmt.Println("insertに成功しました")
-
-	return c.JSON(http.StatusOK, nil)
+func Di() *model.UserHandler {
+	m := mongodb.NewMongoQuery(mongodb.Mongo)
+	u := model.NewUserHandler(m)
+	return u
 }

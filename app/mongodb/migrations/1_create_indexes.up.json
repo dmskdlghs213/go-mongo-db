@@ -1,0 +1,29 @@
+[
+  {
+    "createIndexes": "test_collections",
+    "indexes": [
+      {
+        "key": {
+          "name": 1
+        },
+        "name": "name_sort_by_asc_created",
+        "background": true,
+        "collation": {
+          "locale": "en"
+        }
+      },
+      {
+        "key": {
+          "old": 1
+        },
+        "name": "old_sort_by_asc_created",
+        "background": true,
+        "partialFilterExpression": {
+          "name": {
+            "$exists": true
+          }
+        }
+      }
+    ]
+  }
+]

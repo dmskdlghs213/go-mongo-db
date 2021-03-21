@@ -1,0 +1,31 @@
+[
+    {
+        "create": "test_collections_2",
+        "autoIndexId": true,
+        "validator": {
+            "$jsonSchema": {
+                "bsonType": "object",
+                "required": [
+                    "name",
+                    "old"
+                ],
+                "properties": {
+                    "name": {
+                        "bsonType": "string",
+                        "description": "must be a string and is required, max:20, min:2",
+                        "maxLength": 20,
+                        "minLength": 2
+                    },
+                    "old": {
+                        "bsonType": "int",
+                        "description": "must be a string and is required",
+                        "maximum": 130,
+                        "minimum": 0
+                    }
+                }
+            }
+        },
+        "validationLevel": "strict",
+        "validationAction": "error"
+    }
+]

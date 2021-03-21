@@ -12,6 +12,8 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-w -s" -o /go/bin/a
 FROM alpine
 
 COPY --from=build-image /go/bin/app /go/bin/app
+COPY --from=build-image ./mongodb/migrations /migrations
+RUN chmod -R 777 /migrations
 
 EXPOSE 8888
 
