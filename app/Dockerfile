@@ -13,7 +13,7 @@ FROM alpine
 
 COPY --from=build-image /go/bin/app /go/bin/app
 COPY --from=build-image ./mongodb/migrations /migrations
-RUN chmod -R 777 /migrations
+RUN chmod -R 400 /migrations
 
 EXPOSE 8888
 
